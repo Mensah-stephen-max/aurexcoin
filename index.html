@@ -1,75 +1,1362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aurex | The Next Generation Coin</title>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurex - The Future of Decentralized Value</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0a1a2f;
+            --navy-light: #1a2a3f;
+            --gold: #d4af37;
+            --gold-light: #e8c874;
+            --white: #ffffff;
+            --gray-light: #f5f7fa;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(10, 26, 47, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/aurex-pattern.png') center/cover;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            max-width: 200px;
+            filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.4));
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* What is Aurex */
+        .about-aurex {
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-top: 3px;
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Technology */
+        .technology {
+            background-color: var(--gray-light);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .tech-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .tech-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background-color: var(--white);
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .use-case-card {
+            background-color: var(--gray-light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .use-case-card:hover {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            transform: translateY(-10px);
+        }
+
+        .use-case-card:hover h3,
+        .use-case-card:hover p {
+            color: var(--white);
+        }
+
+        .use-case-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .use-case-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .use-case-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Dashboard Preview */
+        .dashboard {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+        }
+
+        .dashboard .section-title h2,
+        .dashboard .section-title p {
+            color: var(--white);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .dashboard-image {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .dashboard-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tokenomics */
+        .tokenomics {
+            background-color: var(--white);
+        }
+
+        .tokenomics-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .tokenomics-chart {
+            flex: 1;
+            text-align: center;
+        }
+
+        .tokenomics-chart img {
+            max-width: 100%;
+        }
+
+        .tokenomics-details {
+            flex: 1;
+        }
+
+        .tokenomics-item {
+            margin-bottom: 25px;
+        }
+
+        .tokenomics-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        .tokenomics-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            background-color: var(--gray-light);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--gold);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--white);
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -12px;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .timeline-date {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Mining */
+        .mining {
+            background-color: var(--white);
+        }
+
+        .mining-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .mining-text {
+            flex: 1;
+        }
+
+        .mining-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+
+        .mining-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .mining-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mining-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Security */
+        .security {
+            background-color: var(--gray-light);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .security-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .security-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .security-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .security-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .security-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .tokenomics-content,
+            .mining-content {
+                flex-direction: column;
+            }
+
+            .about-image,
+            .tokenomics-chart,
+            .mining-image {
+                margin-top: 40px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .left::after,
+            .right::after {
+                left: 18px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Aurex</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#mining">Mining</a>
-      <a href="#airdrop">Airdrop</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://example.com/aurex-logo.png" alt="Aurex Logo">
+                <span>Aurex</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#tokenomics">Tokenomics</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#mining">Mining</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
 
-  <section class="hero">
-    <h1>Welcome to Aurex</h1>
-    <p>The world's most advanced decentralized native coin. Fast, secure, and scalable.</p>
-    <a href="#airdrop" class="btn">Join Airdrop</a>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Aurex – The Future of Decentralized Value</h1>
+            <p>A next-generation cryptocurrency combining Bitcoin-level scarcity with Ethereum-like utility, built for speed, security, and mass adoption.</p>
+            <div class="hero-buttons">
+                <a href="#mining" class="btn btn-primary">Start Mining</a>
+                <a href="#about" class="btn btn-secondary">Explore Aurex</a>
+                <a href="https://t.me/AurexOfficial" class="btn btn-secondary">Join Telegram</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://example.com/aurex-coin.png" alt="Aurex Coin">
+            </div>
+        </div>
+    </section>
 
-  <section id="about">
-    <h2>About Aurex</h2>
-    <p>Aurex is a decentralized native coin combining the scarcity of Bitcoin, the utility of Ethereum, and the speed of Solana. Built with a hybrid consensus mechanism (PoW + PoS), Aurex ensures security, scalability, and energy efficiency. With up to 60,000 TPS and near-zero fees, it’s ready for mass adoption.</p>
-  </section>
+    <!-- What is Aurex -->
+    <section id="about" class="about-aurex">
+        <div class="container">
+            <div class="section-title">
+                <h2>What is Aurex?</h2>
+                <p>Aurex (AUX) is a native cryptocurrency coin (not a token) designed to be the most advanced and accessible digital asset in the blockchain space.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Revolutionizing Blockchain Technology</h3>
+                    <p>Aurex represents a paradigm shift in decentralized systems, combining the best features of established cryptocurrencies while introducing groundbreaking innovations.</p>
+                    <p>With real decentralization at its core, Aurex offers fast transaction finality, smart contract capability, and a robust ecosystem designed for both developers and end-users.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>True Decentralization</h4>
+                                <p>No central control, community-driven development</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Fast Finality</h4>
+                                <p>Instant transaction confirmation</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Smart Contracts</h4>
+                                <p>Turing-complete programming</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Fixed Supply</h4>
+                                <p>50 million AUX total supply</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://example.com/aurex-network.png" alt="Aurex Network">
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="tokenomics">
-    <h2>Tokenomics</h2>
-    <ul>
-      <li><strong>Total Supply:</strong> 50,000,000 AURX</li>
-      <li><strong>Public Mining:</strong> 35,000,000 AURX (70%)</li>
-      <li><strong>Community Airdrop:</strong> 450,000 AURX (0.9%)</li>
-      <li><strong>Burn Allocation:</strong> 2,000,000 AURX (4%)</li>
-      <li><strong>Liquidity Reserve:</strong> 12,550,000 AURX (25.1%)</li>
-    </ul>
-  </section>
+    <!-- Technology -->
+    <section id="technology" class="technology">
+        <div class="container">
+            <div class="section-title">
+                <h2>Advanced Technology</h2>
+                <p>Aurex leverages cutting-edge blockchain innovations to deliver unmatched performance and security.</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Hybrid Consensus</h3>
+                    <p>Combining Proof-of-Work security with Proof-of-Stake efficiency for optimal decentralization and energy efficiency.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>60,000+ TPS</h3>
+                    <p>Through sharding, zk-rollups, and L2 scaling solutions, Aurex achieves unprecedented transaction speeds.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Ultra-Low Fees</h3>
+                    <p>Microtransactions become feasible with fees that are fractions of a cent, enabling new use cases.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Unmatched Security</h3>
+                    <p>Military-grade encryption, quantum resistance, and decentralized validation ensure your assets are protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="roadmap">
-    <h2>Roadmap</h2>
-    <ol>
-      <li><strong>Q3 2025:</strong> Launch Website, Telegram Bot, Mining Portal</li>
-      <li><strong>Q4 2025:</strong> Exchange Listings (DEX/CEX), Mobile App Launch</li>
-      <li><strong>Q1 2026:</strong> Smart Contracts, Staking Pools, NFT Marketplace</li>
-      <li><strong>Q2 2026:</strong> Ecosystem Grants & Real-World Integrations</li>
-    </ol>
-  </section>
+    <!-- Use Cases -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <div class="section-title">
+                <h2>Use Cases</h2>
+                <p>Aurex is designed to power the next generation of decentralized applications and financial systems.</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Cross-Border Payments</h3>
+                    <p>Send money globally in seconds with minimal fees, bypassing traditional banking systems.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>DeFi & DApps</h3>
+                    <p>Power decentralized finance applications, lending platforms, and more on a scalable blockchain.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>NFTs & Gaming</h3>
+                    <p>Mint and trade digital assets with fast, low-cost transactions perfect for gaming economies.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Automation</h3>
+                    <p>Enable micropayments for AI services and machine-to-machine transactions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="mining">
-    <h2>Mining</h2>
-    <p>Anyone can mine Aurex through our Telegram bot and web miner. Each click yields 0.0000001 AURX. Rewards are limited daily to ensure fairness and scarcity. Mining is Proof-of-Work initiated, verified via hybrid consensus.</p>
-  </section>
+    <!-- Dashboard Preview -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="section-title">
+                <h2>Aurex Network Stats</h2>
+                <p>Real-time data from the Aurex blockchain network</p>
+            </div>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-value">$1.2B</div>
+                    <div class="stat-label">Market Cap</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">18.7M</div>
+                    <div class="stat-label">Circulating Supply</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">256K</div>
+                    <div class="stat-label">Wallet Holders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">42K</div>
+                    <div class="stat-label">Transactions per Second</div>
+                </div>
+            </div>
+            <div class="dashboard-image">
+                <img src="https://example.com/aurex-dashboard.png" alt="Aurex Dashboard">
+            </div>
+        </div>
+    </section>
 
-  <section id="airdrop">
-    <h2>Airdrop Campaign</h2>
-    <p>Participate in our global airdrop to earn free AURX. Invite friends, complete tasks, and get rewarded. You’ll need your wallet address to claim.</p>
-    <a href="https://t.me/AurexMiningPortalBot" class="btn">Join Airdrop Now</a>
-  </section>
+    <!-- Tokenomics -->
+    <section id="tokenomics" class="tokenomics">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tokenomics</h2>
+                <p>Carefully designed economic model ensuring long-term sustainability and value appreciation</p>
+            </div>
+            <div class="tokenomics-content">
+                <div class="tokenomics-chart">
+                    <img src="https://example.com/aurex-tokenomics.png" alt="Aurex Tokenomics">
+                </div>
+                <div class="tokenomics-details">
+                    <div class="tokenomics-item">
+                        <h3>Fixed Total Supply</h3>
+                        <p>50 million AUX will ever exist, creating Bitcoin-like scarcity with Ethereum-like utility.</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <h3>Fair Launch</h3>
+                        <p>No presale, no VC allocation - Aurex launched fairly through mining and community distribution.</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <h3>Community Airdrop</h3>
+                        <p>0.9% of total supply distributed to early supporters and contributors.</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <h3>Deflationary Mechanism</h3>
+                        <p>Transaction fees are partially burned, creating increasing scarcity over time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact & Support</h2>
-    <p>Email: support@aurexcoin.com</p>
-    <p>Telegram: @AurexProject</p>
-  </section>
+    <!-- Roadmap -->
+    <section id="roadmap" class="roadmap">
+        <div class="container">
+            <div class="section-title">
+                <h2>Roadmap</h2>
+                <p>Our strategic plan for development and ecosystem growth</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2024</div>
+                        <h3>Testnet Launch</h3>
+                        <p>Public testnet release with core functionality for developer testing and community feedback.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q1 2025</div>
+                        <h3>Mainnet Activation</h3>
+                        <p>Aurex mainnet goes live with hybrid consensus and basic smart contract functionality.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q2 2025</div>
+                        <h3>Wallet Integration</h3>
+                        <p>Official wallet release with staking functionality and DApp browser.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q4 2025</div>
+                        <h3>CEX Listings</h3>
+                        <p>Major exchange listings to increase liquidity and accessibility.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026</div>
+                        <h3>Ecosystem Development</h3>
+                        <p>Focus on developer tools, grants program, and mainstream adoption initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Aurex. All Rights Reserved.</p>
-  </footer>
+    <!-- Mining -->
+    <section id="mining" class="mining">
+        <div class="container">
+            <div class="section-title">
+                <h2>Start Mining Aurex</h2>
+                <p>Participate in securing the network and earn AUX rewards through our innovative mining system</p>
+            </div>
+            <div class="mining-content">
+                <div class="mining-text">
+                    <h3>Telegram-Based Mining</h3>
+                    <p>Aurex introduces a revolutionary approach to mining that makes participation accessible to everyone, regardless of technical expertise or hardware resources.</p>
+                    <p>Through our Telegram mining bot, you can contribute to network security and earn micro-rewards (0.0000001 AUX per click) simply by interacting with the system.</p>
+                    <p>This innovative mechanism combines Proof-of-Work concepts with social engagement, creating a fair distribution model while maintaining network security.</p>
+                    <div class="hero-buttons" style="justify-content: flex-start; margin-top: 30px;">
+                        <a href="https://t.me/AurexMiningPortalBot" class="btn btn-primary">Start Mining Now</a>
+                        <a href="#" class="btn btn-secondary">Mining Guide</a>
+                    </div>
+                </div>
+                <div class="mining-image">
+                    <img src="https://example.com/aurex-mining.png" alt="Aurex Mining">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section class="security">
+        <div class="container">
+            <div class="section-title">
+                <h2>Security First</h2>
+                <p>Aurex is built with multiple layers of protection to safeguard your assets and data</p>
+            </div>
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Independent Audits</h3>
+                    <p>Regular security audits by leading blockchain security firms to ensure code integrity.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Bug Bounty Program</h3>
+                    <p>Rewards for white hat hackers who discover and report vulnerabilities.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Anti-Rug Measures</h3>
+                    <p>No admin keys, no backdoors - the protocol is fully decentralized and unstoppable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Join the Aurex Revolution</h2>
+            <p>Be part of the next evolution in blockchain technology and decentralized finance. Start mining, building, or investing in Aurex today.</p>
+            <div class="cta-buttons">
+                <a href="https://t.me/AurexMiningPortalBot" class="btn btn-primary">Start Mining</a>
+                <a href="#" class="btn btn-secondary">Explore Whitepaper</a>
+                <a href="https://t.me/AurexOfficial" class="btn btn-secondary">Join Telegram</a>
+                <a href="#" class="btn btn-secondary">Claim Airdrop</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://example.com/aurex-logo-white.png" alt="Aurex Logo">
+                        <span>Aurex</span>
+                    </div>
+                    <p>The future of decentralized value. Combining Bitcoin-level scarcity with Ethereum-like utility for a truly next-generation cryptocurrency.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/AurexOfficial"><i class="fab fa-telegram"></i></a>
+                        <a href="https://twitter.com/AurexCoin"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/AurexProject"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Whitepaper</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="https://t.me/AurexOfficial">Telegram</a></li>
+                        <li><a href="https://twitter.com/AurexCoin">Twitter</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Reddit</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built with 💛 by the future of money. © 2024 Aurex. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navUl = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navUl.style.display = navUl.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navUl.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate stats counter
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize animation when stats come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue('market-cap', 0, 1200000000, 2000);
+                    animateValue('circulating-supply', 0, 18700000, 2000);
+                    animateValue('wallet-holders', 0, 256000, 2000);
+                    animateValue('tps', 0, 42000, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 0.5});
+
+        const statsSection = document.querySelector('.dashboard-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
 </body>
 </html>
